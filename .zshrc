@@ -156,6 +156,7 @@ fi
 
 export GOPATH=$HOME/go
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export WORKON_HOME=$HOME/.virtualenvs
 alias gl="fshow"
 alias gs="git status"
 alias gc="git commit -m"

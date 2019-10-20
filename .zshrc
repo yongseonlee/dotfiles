@@ -1,12 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -85,19 +78,13 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-PROMPT='%B%F{91}$(_d_day)%f%b $(git_prompt_info)$(_curr_venv)
+PROMPT='$(git_prompt_info)$(_curr_venv)$(_curr_python)$(_curr_tf)
 ${ret_status} %{$fg[cyan]%}%c%{$reset_color%} '
 
-function _d_day() {
-  if [[ ! -z $THE_DAY ]]; then
-    today=$(date +%s)
-    the_day=$(date -ujf"%Y-%m-%d%H%M%S%z" $THE_DAY"000000+0900" +"%s")
-    difference=$((the_day-today))
-    if [[ $difference -lt -86400 ]]; then
-        echo "[D+$((-difference / 86400))]"
-    else
-        echo "[D-$(((difference + 86400) / 86400))]"
-    fi
+function _curr_tf() {
+  if [[ -d .terraform ]]; then
+    tf=$(cat .terraform/environment 2>/dev/null || print 'none')
+    echo "$(_decor tf 228 $tf)"
   fi
 }
 
@@ -106,30 +93,21 @@ function _curr_venv() {
   
   if [[ "venv" == $venv_name ]]; then
       echo "$(_decor venv 228 $(basename $(which python | sed -e "s/\/venv\/bin\/python//g")))"
-  elif [[ "usr" != $venv_name && "local" != $venv_name ]]; then
+  elif [[ "usr" != $venv_name && "local" != $venv_name && "python" != $venv_name ]]; then
       echo "$(_decor venv 228 $venv_name)"
   fi
+
+}
+
+function _curr_python() {
+  version=$(python --version 2>&1)
+  echo "$(_decor python 228 $(echo $version | sed -e "s/Python //g"))"
 }
 
 function _decor() {
   if [[ ! -z $3 ]]; then
     echo "%B%F{252}$1:(%f%F{$2}$3%f%F{252})%f%b "
   fi
-}
-
-KEY_PATH="$HOME/.ssh/id_rsa"
-PUBKEY_PATH="$KEY_PATH.pub"
-
-# fshow - git commit browser
-fshow() {
-  git log --graph --color=always \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-FZF-EOF"
 }
 
 # cdf - cd into the directory of the selected file
@@ -156,22 +134,22 @@ fi
 
 export GOPATH=$HOME/go
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUALENVWRAPPER_PYTHON=$(brew --prefix)/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
-alias gl="fshow"
-alias gs="git status"
-alias gc="git commit -m"
-alias gck="git checkout"
-alias gpr="git pull -r"
+alias ecl="$(brew --prefix)/lib/ruby/gems/2.6.0/bin/ecl"
 alias tf="terraform"
 alias twls="terraform workspace list"
 alias twsl="terraform workspace select"
 alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-alias venvactivate="source venv/bin/activate"
 
-if [ -d $HOME/.private-zshrc ]; then
-	for file in "$(find $HOME/.private-zshrc -type f -maxdepth 1 -print -quit)"; do source $file; done
-else
-	echo ".private-zshrc not found."
+if [ -d $HOME/.secrets ]; then
+	for file in "$(find $HOME/.secrets -type f -maxdepth 1 -print -quit)"; do source $file; done
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pyenv
+eval "$(pyenv init -)"
+
+# virtualenvwrapper
+source $(brew --prefix)/bin/virtualenvwrapper.sh

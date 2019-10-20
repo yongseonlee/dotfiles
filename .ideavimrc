@@ -1,0 +1,11 @@
+set incsearch "incremental search
+set hlsearch "search를 할때 highlight를 해준다.
+set relativenumber
+set number
+
+"Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+noremap <C-n> :noh<CR>
+vnoremap <backspace> "_d

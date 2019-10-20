@@ -143,7 +143,7 @@ alias twsl="terraform workspace select"
 alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
 if [ -d $HOME/.secrets ]; then
-	for file in "$(find $HOME/.secrets -type f -maxdepth 1 -print -quit)"; do source $file; done
+	for file in $(find $HOME/.secrets -type f -maxdepth 1 -print); do source $file; done
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

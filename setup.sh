@@ -1,16 +1,15 @@
 #!/bin/bash
 
 
-if [[ $1 == "--brew" ]]; then
-    if [[ ! command -v brew >/dev/null 2>&1 ]]; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-    brew tap caskroom/cask
-    brew tap homebrew/cask-fonts
-    brew cask install $(cat .homebrew/casks)
-    brew install $(cat .homebrew/formulae)
-    $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
-fi
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap homebrew/cask-cask
+brew tap homebrew/cask-fonts
+brew cask install $(cat .homebrew/casks)
+brew install $(cat .homebrew/formulae)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 
 for file in $(ls -a); do
@@ -23,3 +22,5 @@ for file in $(ls -a); do
         cp -r $file ~/.$file
     fi
 done
+
+git config --global core.excludesfile ~/.gitignore_global

@@ -79,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 #
 
 PROMPT='$(git_prompt_info)$(_curr_venv)$(_curr_python)$(_curr_tf)
-${ret_status} %{$fg[cyan]%}%c%{$reset_color%} '
+%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%c%{$reset_color%} '
 
 function _curr_tf() {
   if [[ -d .terraform ]]; then
@@ -152,4 +152,4 @@ fi
 eval "$(pyenv init -)"
 
 # virtualenvwrapper
-source $(brew --prefix)/bin/virtualenvwrapper.sh
+# source $(brew --prefix)/bin/virtualenvwrapper.sh

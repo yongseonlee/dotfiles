@@ -23,3 +23,4 @@ for file in $(ls -a); do
 done
 
 git config --global core.excludesfile ~/.gitignore_global
+$(brew --prefix)/opt/fzf/install

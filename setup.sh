@@ -2,7 +2,6 @@
 
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew tap homebrew/cask-cask
 brew tap homebrew/cask-fonts
 brew cask install $(cat .homebrew/casks)
 brew install $(cat .homebrew/formulae)

@@ -1,2 +1,5 @@
 .idea/
 venv/
+gcp.json
+.python-version
+__pycache__/

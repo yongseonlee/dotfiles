@@ -126,6 +126,10 @@ fe() {
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
+gch() {
+    git checkout "$(git branch | fzf | tr -d '[:space:]')" 2>/dev/null || true
+}
+
 # Move next only if `homebrew` is installed
 if command -v brew >/dev/null 2>&1; then
   # Load rupa's z if installed

@@ -137,6 +137,8 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUALENVWRAPPER_PYTHON=$(brew --prefix)/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs

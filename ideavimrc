@@ -1,3 +1,4 @@
+set visualbell
 set incsearch "incremental search
 set hlsearch "search를 할때 highlight를 해준다.
 set number

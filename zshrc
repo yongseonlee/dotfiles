@@ -78,6 +78,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 PROMPT='$(git_prompt_info)$(_curr_venv)$(_curr_python)$(_curr_tf)
 %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%c%{$reset_color%} '
 
@@ -93,7 +94,7 @@ function _curr_venv() {
   
   if [[ "venv" == $venv_name ]]; then
       echo "$(_decor venv 228 $(basename $(which python | sed -e "s/\/venv\/bin\/python//g")))"
-  elif [[ "usr" != $venv_name && "local" != $venv_name && "python" != $venv_name ]]; then
+  elif [[ "usr" != $venv_name && "local" != $venv_name && "python" != $venv_name && "homebrew" != $venv_name ]]; then
       echo "$(_decor venv 228 $venv_name)"
   fi
 
@@ -138,24 +139,12 @@ fi
 
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-export VIRTUALENVWRAPPER_PYTHON=$(brew --prefix)/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-alias ecl="$(brew --prefix)/lib/ruby/gems/2.6.0/bin/ecl"
+export PATH=/opt/homebrew/bin:$GOBIN:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin":$PATH
+export TERRAFORM_CONFIG=$HOME/.terraform.d/credentials.tfrc.json
 alias tf="terraform"
-alias twls="terraform workspace list"
-alias twsl="terraform workspace select"
-alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-
-if [ -d $HOME/.secrets ]; then
-	for file in $(find $HOME/.secrets -type f -maxdepth 1 -print); do source $file; done
-fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pyenv
 eval "$(pyenv init -)"
 
-# virtualenvwrapper
-# source $(brew --prefix)/bin/virtualenvwrapper.sh

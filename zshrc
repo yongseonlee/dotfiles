@@ -78,6 +78,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+alias tf="terraform"
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=/opt/homebrew/bin:$GOBIN:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin":$PATH
+export TERRAFORM_CONFIG=$HOME/.terraform.d/credentials.tfrc.json
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 PROMPT='$(git_prompt_info)$(_curr_venv)$(_curr_python)$(_curr_tf)
 %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%c%{$reset_color%} '
@@ -137,11 +142,6 @@ if command -v brew >/dev/null 2>&1; then
   [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
 fi
 
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=/opt/homebrew/bin:$GOBIN:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin":$PATH
-export TERRAFORM_CONFIG=$HOME/.terraform.d/credentials.tfrc.json
-alias tf="terraform"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

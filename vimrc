@@ -61,6 +61,7 @@ set hidden              " enable multiple modified buffers
 set history=1000
 set autoread            " automatically read file that has been changed on disk and doesn't have changes in vim
 
+set backspace=indent,eol,start
 
 " center display after searching
 nnoremap n   nzz
@@ -84,3 +85,4 @@ vnoremap <backspace> "_d
 set encoding=utf-8
 set fileencodings=utf-8
 command! NE NERDTree
+

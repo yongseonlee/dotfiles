@@ -4,7 +4,8 @@ htop
 tig
 z
 fzf
-rg
+ripgrep
+bat
 stats
 karabiner-elements
 font-d2coding

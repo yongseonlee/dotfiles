@@ -4,10 +4,11 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'The-NERD-Tree'
-set rtp+=/usr/local/opt/fzf
+Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
+set rtp+=/usr/local/opt/fzf
 "----------------------------
 
 filetype plugin indent on " filetype에 따른 plugin, indetation을 켠다.
@@ -43,8 +44,6 @@ set dy+=uhex "show unprintable characters as a hex number
 set laststatus=2
 set scrolloff=3  " 커서의 위아래로 항상 세줄의 여유가 있게끔.
 set completeopt=menu,menuone,longest " do not show preview window on omnicompletion
-command! W w " :W로 저장
-command! E Explore
 
 "vertical split & show git diff when git commit
 autocmd FileType gitcommit DiffGitCached | wincmd L | wincmd p
@@ -84,5 +83,7 @@ vnoremap <backspace> "_d
 
 set encoding=utf-8
 set fileencodings=utf-8
-command! NE NERDTree
+
+command! W w " :W로 저장
+command! E NERDTree
 

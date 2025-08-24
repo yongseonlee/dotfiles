@@ -3,3 +3,5 @@ venv/
 gcp.json
 .python-version
 __pycache__/
+*.swp
+

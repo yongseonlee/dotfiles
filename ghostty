@@ -1,0 +1,9 @@
+copy-on-select = clipboard
+macos-option-as-alt = left
+keybind = ctrl+enter=text:\x0a
+keybind = shift+enter=text:\x0a
+
+theme = "Kolorit"
+font-family = "Monaco"
+font-size = 14
+

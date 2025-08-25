@@ -67,9 +67,16 @@ fi
 eval "$(mise activate zsh)"
 
 alias tf="terraform"
+alias rm='echo "This is not the command you are looking for."; false'
+
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export TERRAFORM_CONFIG=$HOME/.terraform.d/credentials.tfrc.json
 
-export PATH="/opt/homebrew/bin:$GOBIN:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/opt/homebrew/opt/postgresql@17/bin:/Users/ys/Library/pnpm:$PATH"
+export PATH="$GOBIN:$PATH"
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+export PATH="/Users/ys/Library/pnpm:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 

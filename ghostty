@@ -1,5 +1,7 @@
 copy-on-select = clipboard
 macos-option-as-alt = left
+shell-integration-features = no-cursor
+
 keybind = ctrl+enter=text:\x0a
 keybind = shift+enter=text:\x0a
 
